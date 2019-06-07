@@ -25,9 +25,10 @@ var getMaxElement = function (array) {
   return maxElement;
 };
 
-var getRandomBlue = function () {
-  var randomBlue = 'rgba(0,' + Math.round(Math.random() * 255) + ', 255 , 1)';
-  return randomBlue;
+var getBarColor = function (player) {
+  var colorYou = 'rgba(255, 0, 0, 1)';
+  var randomBlue = 'hsl(240,' + Math.round(Math.random() * 100) + '%,50%)';
+  return (player === 'Вы') ? colorYou : randomBlue;
 };
 
 window.renderStatistics = function (ctx, players, times) {
@@ -43,17 +44,12 @@ window.renderStatistics = function (ctx, players, times) {
 
   for (var i = 0; i < players.length; i++) {
     var barHeight = (BAR_MAX_HEIGHT * times[i]) / maxTime;
+    var barColor = getBarColor(players[i]);
     var barX = CLOUD_X + GAP_BETWEEN_COLUMNS + (GAP_BETWEEN_COLUMNS + BAR_WIDTH) * i;
     var barY = CLOUD_HEIGHT - barHeight;
     ctx.fillStyle = '#000';
     ctx.fillText(players[i], barX, CLOUD_HEIGHT + GAP / 2);
     ctx.fillText(Math.round(times[i]), barX, barY - GAP * 2);
-
-    if (players[i] === 'Вы') {
-      var barColor = 'rgba(255, 0, 0, 1)';
-    } else {
-      barColor = getRandomBlue();
-    }
     renderRectangle(ctx, barX, barY - GAP, BAR_WIDTH, barHeight, barColor);
   }
 };
