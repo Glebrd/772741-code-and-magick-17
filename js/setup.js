@@ -53,13 +53,14 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-
-// Добавляем клонированный шаблон на страницу и заполняем его случайными данными
-var wizards = generateWizards(); // Заполнили массив данных волшебников
+// Заполнили массив данных волшебников
+var wizards = generateWizards();
+// Складываем новые элементы в контейцнер
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < wizards.length; i++) {
   fragment.appendChild(renderWizard(wizards[i]));
 }
+// Добавляем элементы из контейцнера на страницу
 similarListElement.appendChild(fragment);
 
 
