@@ -12,18 +12,18 @@ var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 // Получаем случайные параметры волшебника
 var generateRandomName = function () {
-  var WizardName = WIZARDS_NAMES[Math.floor(Math.random() * WIZARDS_NAMES.length)] + ' ' + WIZARDS_LASTNAMES[Math.floor(Math.random() * WIZARDS_LASTNAMES.length)];
-  return WizardName;
+  var wizardName = WIZARDS_NAMES[Math.floor(Math.random() * WIZARDS_NAMES.length)] + ' ' + WIZARDS_LASTNAMES[Math.floor(Math.random() * WIZARDS_LASTNAMES.length)];
+  return wizardName;
 };
 
 var generateRandomWizardColor = function () {
-  var WizardCoatColor = WIZARDS_COATS_COLORS[Math.floor(Math.random() * WIZARDS_COATS_COLORS.length)];
-  return WizardCoatColor;
+  var wizardCoatColor = WIZARDS_COATS_COLORS[Math.floor(Math.random() * WIZARDS_COATS_COLORS.length)];
+  return wizardCoatColor;
 };
 
 var generateRandomEyesColor = function () {
-  var WizardEyesColor = WIZARDS_EYES_COLORS[Math.floor(Math.random() * WIZARDS_EYES_COLORS.length)];
-  return WizardEyesColor;
+  var wizardEyesColor = WIZARDS_EYES_COLORS[Math.floor(Math.random() * WIZARDS_EYES_COLORS.length)];
+  return wizardEyesColor;
 };
 
 
@@ -35,8 +35,9 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
 
 // Создаём массив, состоящий из 4 сгенерированных JS объектов
 var generateWizards = function () {
+  var numberOfWizards = 4;
   var wizards = [];
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < numberOfWizards; i++) {
     wizards[i] = {name: generateRandomName(), coatColor: generateRandomWizardColor(), eyesColor: generateRandomEyesColor()};
   }
   return wizards;
