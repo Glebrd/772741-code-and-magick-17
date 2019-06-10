@@ -1,8 +1,11 @@
 'use strict';
 
 // Показываем блок .setup, убрав в JS-коде у него класс .hidden.
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+var showElement = function (hiddenElementClass) {
+  document.querySelector(hiddenElementClass).classList.remove('hidden');
+};
+
+showElement('.setup');
 
 // Создаём массивы
 var WIZARDS_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
@@ -10,25 +13,15 @@ var WIZARDS_LASTNAMES = ['да Марья', 'Верон', 'Мирабелла', 
 var WIZARDS_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
-// Получаем случайные параметры волшебника
-var generateRandomName = function () {
-  var wizardName = WIZARDS_NAMES[Math.floor(Math.random() * WIZARDS_NAMES.length)] + ' ' + WIZARDS_LASTNAMES[Math.floor(Math.random() * WIZARDS_LASTNAMES.length)];
-  return wizardName;
+// Генерируем случайно число
+var generateRandomNumber = function (max) {
+  return Math.floor(Math.random() * max);
 };
 
-var generateRandomWizardColor = function () {
-  var wizardCoatColor = WIZARDS_COATS_COLORS[Math.floor(Math.random() * WIZARDS_COATS_COLORS.length)];
-  return wizardCoatColor;
-};
+// Находим элемент в который будем вставлять новые элементы
+var similarListElement = document.querySelector('.setup-similar-list');
 
-var generateRandomEyesColor = function () {
-  var wizardEyesColor = WIZARDS_EYES_COLORS[Math.floor(Math.random() * WIZARDS_EYES_COLORS.length)];
-  return wizardEyesColor;
-};
-
-
-var similarListElement = userDialog.querySelector('.setup-similar-list');
-
+// Находим шаблон
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
@@ -38,7 +31,10 @@ var generateWizards = function () {
   var numberOfWizards = 4;
   var wizards = [];
   for (var i = 0; i < numberOfWizards; i++) {
-    wizards[i] = {name: generateRandomName(), coatColor: generateRandomWizardColor(), eyesColor: generateRandomEyesColor()};
+    wizards[i] = {
+      name: WIZARDS_NAMES[generateRandomNumber(WIZARDS_NAMES.length)] + ' ' + WIZARDS_LASTNAMES[generateRandomNumber(WIZARDS_LASTNAMES.length)],
+      coatColor: WIZARDS_COATS_COLORS[generateRandomNumber(WIZARDS_COATS_COLORS.length)],
+      eyesColor: WIZARDS_EYES_COLORS[generateRandomNumber(WIZARDS_EYES_COLORS.length)]};
   }
   return wizards;
 };
@@ -64,6 +60,5 @@ for (var i = 0; i < wizards.length; i++) {
 // Добавляем элементы из контейцнера на страницу
 similarListElement.appendChild(fragment);
 
-
 // Покажем блок .setup-similar, удалив у него CSS-класс hidden.
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+showElement('.setup-similar');
