@@ -17,7 +17,7 @@ var generateRandomNumber = function (max) {
 };
 
 // Генерируем случайное свойство волшебника
-var generateWizardProperty = function (arrayName) {
+var getRandomArrElement = function (arrayName) {
   return arrayName[generateRandomNumber(arrayName.length)];
 };
 
@@ -26,9 +26,9 @@ var generateWizardsArray = function (numberOfWizards) {
   var wizards = [];
   for (var i = 0; i < numberOfWizards; i++) {
     wizards[i] = {
-      name: generateWizardProperty(WIZARDS_NAMES) + ' ' + generateWizardProperty(WIZARDS_LASTNAMES),
-      coatColor: generateWizardProperty(WIZARDS_COATS_COLORS),
-      eyesColor: generateWizardProperty(WIZARDS_EYES_COLORS)
+      name: getRandomArrElement(WIZARDS_NAMES) + ' ' + getRandomArrElement(WIZARDS_LASTNAMES),
+      coatColor: getRandomArrElement(WIZARDS_COATS_COLORS),
+      eyesColor: getRandomArrElement(WIZARDS_EYES_COLORS)
     };
   }
   return wizards;
@@ -61,8 +61,8 @@ var addToFragment = function (wizards) {
 };
 
 // Добавляем элементы из контейцнера на страницу
-var numberOfWizards = 4;
-similarListElement.appendChild(addToFragment(generateWizardsArray(numberOfWizards)));
+var NUMBER_OF_WIZARDS = 4;
+similarListElement.appendChild(addToFragment(generateWizardsArray(NUMBER_OF_WIZARDS)));
 
 // Покажем блок .setup-similar, удалив у него CSS-класс hidden.
 var showSetupSimilar = function () {
