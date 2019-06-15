@@ -4,6 +4,7 @@ var WIZARDS_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', '�
 var WIZARDS_LASTNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var WIZARDS_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 // Показываем блок .setup, убрав в JS-коде у него класс .hidden.
 // var showSetup = function () {
@@ -147,3 +148,30 @@ userNameInput.addEventListener('invalid', function (evt) {
 //     target.setCustomValidity('');
 //   }
 // });
+
+// Ручная настройцка волшенбинка
+// Мантия
+
+var coat = document.querySelector('.wizard-eyes');
+coat.addEventListener('click', function() {
+  coat.style.fill = getRandomArrElement(WIZARDS_COATS_COLORS);
+});
+
+var eyes = document.querySelector('.wizard-coat');
+eyes.addEventListener('click', function() {
+  eyes.style.fill = getRandomArrElement(WIZARDS_COATS_COLORS);
+});
+
+var fireball = document.querySelector('.setup-fireball-wrap');
+fireball.addEventListener('click', function() {
+  fireball.style.backgroundColor = getRandomArrElement(FIREBALL_COLORS);
+  fireball.querySelector('input[name="fireball-color"]').value = fireball.style.backgroundColor;
+});
+
+// var fireball = document.querySelector('.setup-fireball-wrap');
+// fireball.addEventListener('click', function() {
+//   fireball.querySelector('input[name="fireball-color"]').value = getRandomArrElement(FIREBALL_COLORS);
+//   console.log(fireball.querySelector('input[name="fireball-color"]').value);
+
+// });
+
