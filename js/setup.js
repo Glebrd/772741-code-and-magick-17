@@ -6,10 +6,10 @@ var WIZARDS_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146,
 var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 // Показываем блок .setup, убрав в JS-коде у него класс .hidden.
-var showSetup = function () {
-  document.querySelector('.setup').classList.remove('hidden');
-};
-showSetup();
+// var showSetup = function () {
+//   document.querySelector('.setup').classList.remove('hidden');
+// };
+// showSetup();
 
 // Генерируем случайно число
 var generateRandomNumber = function (max) {
@@ -69,3 +69,81 @@ var showSetupSimilar = function () {
   document.querySelector('.setup-similar').classList.remove('hidden');
 };
 showSetupSimilar();
+
+// Нажатие на элемент .setup-open приводит
+// к появлению диалогового окна .setup.
+// Окно спрятано с помощью CSS-класса hidden,
+// поэтому, чтобы показать, нужно удалить
+// соответствующий класс
+
+// Нажатие на элемент .setup-open удаляет класс hidden
+// у блока setup. Нажатие на элемент .setup-close, расположенный
+// внутри блока setup возвращает ему класс hidden.
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+
+var onPopupEscPress = function(evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function() {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function() {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function() {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function(evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function() {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function(evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
+
+
+// Проверка валидности формы
+// Имя
+var userNameInput = setup.querySelector('.setup-user-name');
+
+userNameInput.addEventListener('invalid', function (evt) {
+  if (userNameInput.validity.tooShort) {
+    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (userNameInput.validity.tooLong) {
+    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+  } else if (userNameInput.validity.valueMissing) {
+    userNameInput.setCustomValidity('Обязательное поле');
+  } else {
+    userNameInput.setCustomValidity('');
+  }
+});
+
+// userNameInput.addEventListener('input', function (evt) {
+//   var target = evt.target;
+//   if (target.value.length < 2) {
+//     target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+//   } else {
+//     target.setCustomValidity('');
+//   }
+// });
