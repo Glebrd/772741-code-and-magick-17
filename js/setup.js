@@ -71,12 +71,6 @@ var showSetupSimilar = function () {
 };
 showSetupSimilar();
 
-// Нажатие на элемент .setup-open приводит
-// к появлению диалогового окна .setup.
-// Окно спрятано с помощью CSS-класса hidden,
-// поэтому, чтобы показать, нужно удалить
-// соответствующий класс
-
 // Нажатие на элемент .setup-open удаляет класс hidden
 // у блока setup. Нажатие на элемент .setup-close, расположенный
 // внутри блока setup возвращает ему класс hidden.
@@ -87,48 +81,55 @@ var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
 
-var onPopupEscPress = function(evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
+var isEscKey = function (evt) {
+  return evt.keyCode === ESC_KEYCODE;
+};
+
+var isEnterKey = function (evt) {
+  return evt.keyCode === ENTER_KEYCODE;
+};
+
+var onPopupEscPress = function (evt) {
+  if (isEscKey(evt)) {
     closePopup();
   }
 };
 
-var openPopup = function() {
+var openPopup = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
 
-var closePopup = function() {
+var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
 };
 
-setupOpen.addEventListener('click', function() {
+setupOpen.addEventListener('click', function () {
   openPopup();
 });
 
-setupOpen.addEventListener('keydown', function(evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
+setupOpen.addEventListener('keydown', function (evt) {
+  if (isEnterKey(evt)) {
     openPopup();
   }
 });
 
-setupClose.addEventListener('click', function() {
+setupClose.addEventListener('click', function () {
   closePopup();
 });
 
-setupClose.addEventListener('keydown', function(evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
+setupClose.addEventListener('keydown', function (evt) {
+  if (isEnterKey(evt)) {
     closePopup();
   }
 });
-
 
 // Проверка валидности формы
 // Имя
 var userNameInput = setup.querySelector('.setup-user-name');
 
-userNameInput.addEventListener('invalid', function (evt) {
+userNameInput.addEventListener('invalid', function () {
   if (userNameInput.validity.tooShort) {
     userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
   } else if (userNameInput.validity.tooLong) {
@@ -140,38 +141,27 @@ userNameInput.addEventListener('invalid', function (evt) {
   }
 });
 
-// userNameInput.addEventListener('input', function (evt) {
-//   var target = evt.target;
-//   if (target.value.length < 2) {
-//     target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-//   } else {
-//     target.setCustomValidity('');
-//   }
-// });
+// Ручная настройка волшенбинка
 
-// Ручная настройцка волшенбинка
-// Мантия
+var playerSetup = document.querySelector('.setup-player');
 
-var coat = document.querySelector('.wizard-eyes');
-coat.addEventListener('click', function() {
-  coat.style.fill = getRandomArrElement(WIZARDS_COATS_COLORS);
+var eyes = playerSetup.querySelector('.wizard-eyes');
+eyes.addEventListener('click', function () {
+  var eyesColor = getRandomArrElement(WIZARDS_EYES_COLORS);
+  eyes.style.fill = eyesColor;
+  eyes.querySelector('input[name="eyes-color]').value = eyesColor;
 });
 
-var eyes = document.querySelector('.wizard-coat');
-eyes.addEventListener('click', function() {
-  eyes.style.fill = getRandomArrElement(WIZARDS_COATS_COLORS);
+var coat = playerSetup.querySelector('.wizard-coat');
+coat.addEventListener('click', function () {
+  var coatColor = getRandomArrElement(WIZARDS_COATS_COLORS);
+  coat.style.fill = coatColor;
+  coat.querySelector('input[name="coat-color]').value = coatColor;
 });
 
-var fireball = document.querySelector('.setup-fireball-wrap');
-fireball.addEventListener('click', function() {
-  fireball.style.backgroundColor = getRandomArrElement(FIREBALL_COLORS);
-  fireball.querySelector('input[name="fireball-color"]').value = fireball.style.backgroundColor;
+var fireball = playerSetup.querySelector('.setup-fireball-wrap');
+fireball.addEventListener('click', function () {
+  var fireballColor = getRandomArrElement(FIREBALL_COLORS);
+  fireball.style.backgroundColor = fireballColor;
+  fireball.querySelector('input[name="fireball-color"]').value = fireballColor;
 });
-
-// var fireball = document.querySelector('.setup-fireball-wrap');
-// fireball.addEventListener('click', function() {
-//   fireball.querySelector('input[name="fireball-color"]').value = getRandomArrElement(FIREBALL_COLORS);
-//   console.log(fireball.querySelector('input[name="fireball-color"]').value);
-
-// });
-
