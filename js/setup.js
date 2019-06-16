@@ -5,12 +5,8 @@ var WIZARDS_LASTNAMES = ['да Марья', 'Верон', 'Мирабелла', 
 var WIZARDS_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-
-// Показываем блок .setup, убрав в JS-коде у него класс .hidden.
-// var showSetup = function () {
-//   document.querySelector('.setup').classList.remove('hidden');
-// };
-// showSetup();
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
 // Генерируем случайно число
 var generateRandomNumber = function (max) {
@@ -74,8 +70,6 @@ showSetupSimilar();
 // Нажатие на элемент .setup-open удаляет класс hidden
 // у блока setup. Нажатие на элемент .setup-close, расположенный
 // внутри блока setup возвращает ему класс hidden.
-var ESC_KEYCODE = 27;
-var ENTER_KEYCODE = 13;
 
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
@@ -144,24 +138,28 @@ userNameInput.addEventListener('invalid', function () {
 // Ручная настройка волшенбинка
 
 var playerSetup = document.querySelector('.setup-player');
-
 var eyes = playerSetup.querySelector('.wizard-eyes');
-eyes.addEventListener('click', function () {
-  var eyesColor = getRandomArrElement(WIZARDS_EYES_COLORS);
-  eyes.style.fill = eyesColor;
-  eyes.querySelector('input[name="eyes-color]').value = eyesColor;
-});
-
 var coat = playerSetup.querySelector('.wizard-coat');
-coat.addEventListener('click', function () {
+var fireball = playerSetup.querySelector('.setup-fireball-wrap');
+
+var coatClickHandler = function () {
   var coatColor = getRandomArrElement(WIZARDS_COATS_COLORS);
   coat.style.fill = coatColor;
   coat.querySelector('input[name="coat-color]').value = coatColor;
-});
+};
 
-var fireball = playerSetup.querySelector('.setup-fireball-wrap');
-fireball.addEventListener('click', function () {
+var eyesClickHandler = function () {
+  var eyesColor = getRandomArrElement(WIZARDS_EYES_COLORS);
+  eyes.style.fill = eyesColor;
+  eyes.querySelector('input[name="eyes-color]').value = eyesColor;
+};
+
+var fireballClickHandler = function () {
   var fireballColor = getRandomArrElement(FIREBALL_COLORS);
   fireball.style.backgroundColor = fireballColor;
   fireball.querySelector('input[name="fireball-color"]').value = fireballColor;
-});
+};
+
+coat.addEventListener('click', coatClickHandler);
+eyes.addEventListener('click', eyesClickHandler);
+fireball.addEventListener('click', fireballClickHandler);
