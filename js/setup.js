@@ -142,24 +142,24 @@ var eyes = playerSetup.querySelector('.wizard-eyes');
 var coat = playerSetup.querySelector('.wizard-coat');
 var fireball = playerSetup.querySelector('.setup-fireball-wrap');
 
-var coatClickHandler = function () {
+var onCoatClick = function () {
   var coatColor = getRandomArrElement(WIZARDS_COATS_COLORS);
   coat.style.fill = coatColor;
   coat.querySelector('input[name="coat-color]').value = coatColor;
 };
 
-var eyesClickHandler = function () {
+var onEyesClick = function () {
   var eyesColor = getRandomArrElement(WIZARDS_EYES_COLORS);
   eyes.style.fill = eyesColor;
   eyes.querySelector('input[name="eyes-color]').value = eyesColor;
 };
 
-var fireballClickHandler = function () {
+var onFireballClick = function () {
   var fireballColor = getRandomArrElement(FIREBALL_COLORS);
   fireball.style.backgroundColor = fireballColor;
   fireball.querySelector('input[name="fireball-color"]').value = fireballColor;
 };
 
-coat.addEventListener('click', coatClickHandler);
-eyes.addEventListener('click', eyesClickHandler);
-fireball.addEventListener('click', fireballClickHandler);
+coat.addEventListener('click', onCoatClick);
+eyes.addEventListener('click', onEyesClick);
+fireball.addEventListener('click', onFireballClick);
