@@ -5,6 +5,7 @@ var WIZARDS_LASTNAMES = ['да Марья', 'Верон', 'Мирабелла', 
 var WIZARDS_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var NUMBER_OF_WIZARDS = 4;
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 
@@ -14,8 +15,8 @@ var generateRandomNumber = function (max) {
 };
 
 // Генерируем случайное свойство волшебника
-var getRandomArrElement = function (arrayName) {
-  return arrayName[generateRandomNumber(arrayName.length)];
+var getRandomArrayElement = function (array) {
+  return array[generateRandomNumber(array.length)];
 };
 
 // Создаём массив, состоящий из сгенерированных JS объектов
@@ -23,9 +24,9 @@ var generateWizardsArray = function (numberOfWizards) {
   var wizards = [];
   for (var i = 0; i < numberOfWizards; i++) {
     wizards[i] = {
-      name: getRandomArrElement(WIZARDS_NAMES) + ' ' + getRandomArrElement(WIZARDS_LASTNAMES),
-      coatColor: getRandomArrElement(WIZARDS_COATS_COLORS),
-      eyesColor: getRandomArrElement(WIZARDS_EYES_COLORS)
+      name: getRandomArrayElement(WIZARDS_NAMES) + ' ' + getRandomArrayElement(WIZARDS_LASTNAMES),
+      coatColor: getRandomArrayElement(WIZARDS_COATS_COLORS),
+      eyesColor: getRandomArrayElement(WIZARDS_EYES_COLORS)
     };
   }
   return wizards;
@@ -58,7 +59,6 @@ var addToFragment = function (wizards) {
 };
 
 // Добавляем элементы из контейцнера на страницу
-var NUMBER_OF_WIZARDS = 4;
 similarListElement.appendChild(addToFragment(generateWizardsArray(NUMBER_OF_WIZARDS)));
 
 // Покажем блок .setup-similar, удалив у него CSS-класс hidden.
@@ -141,23 +141,26 @@ var playerSetup = document.querySelector('.setup-player');
 var eyes = playerSetup.querySelector('.wizard-eyes');
 var coat = playerSetup.querySelector('.wizard-coat');
 var fireball = playerSetup.querySelector('.setup-fireball-wrap');
+var coatColorInput = coat.querySelector('input[name="coat-color"]');
+var eyesColorInput = coat.querySelector('input[name="eyes-color"]');
+var fireballColorInput = coat.querySelector('input[name="fireball-color"]');
 
 var onCoatClick = function () {
-  var coatColor = getRandomArrElement(WIZARDS_COATS_COLORS);
+  var coatColor = getRandomArrayElement(WIZARDS_COATS_COLORS);
   coat.style.fill = coatColor;
-  coat.querySelector('input[name="coat-color]').value = coatColor;
+  coatColorInput.value = coatColor;
 };
 
 var onEyesClick = function () {
-  var eyesColor = getRandomArrElement(WIZARDS_EYES_COLORS);
+  var eyesColor = getRandomArrayElement(WIZARDS_EYES_COLORS);
   eyes.style.fill = eyesColor;
-  eyes.querySelector('input[name="eyes-color]').value = eyesColor;
+  eyesColorInput.value = eyesColor;
 };
 
 var onFireballClick = function () {
-  var fireballColor = getRandomArrElement(FIREBALL_COLORS);
+  var fireballColor = getRandomArrayElement(FIREBALL_COLORS);
   fireball.style.backgroundColor = fireballColor;
-  fireball.querySelector('input[name="fireball-color"]').value = fireballColor;
+  fireballColorInput.value = fireballColor;
 };
 
 coat.addEventListener('click', onCoatClick);
