@@ -70,10 +70,10 @@ showSetupSimilar();
 // Нажатие на элемент .setup-open удаляет класс hidden
 // у блока setup. Нажатие на элемент .setup-close, расположенный
 // внутри блока setup возвращает ему класс hidden.
-
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
+var userNameInput = setup.querySelector('.setup-user-name');
 
 var isEscKey = function (evt) {
   return evt.keyCode === ESC_KEYCODE;
@@ -84,7 +84,7 @@ var isEnterKey = function (evt) {
 };
 
 var onPopupEscPress = function (evt) {
-  if (isEscKey(evt)) {
+  if (isEscKey(evt) && (userNameInput !== document.activeElement)) {
     closePopup();
   }
 };
@@ -121,7 +121,6 @@ setupClose.addEventListener('keydown', function (evt) {
 
 // Проверка валидности формы
 // Имя
-var userNameInput = setup.querySelector('.setup-user-name');
 
 userNameInput.addEventListener('invalid', function () {
   if (userNameInput.validity.tooShort) {
