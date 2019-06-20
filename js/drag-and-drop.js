@@ -10,13 +10,13 @@
     }
   });
 
-  var moveItemToInventory = function (evt) {
+  var onMoveItemToInventory = function (evt) {
     evt.target.style.backgroundColor = '';
     evt.target.appendChild(draggItem);
     evt.preventDefault();
   };
 
-  var moveItemToShop = function (evt) {
+  var onMoveItemToShop = function (evt) {
     evt.target.style.backgroundColor = '';
     evt.preventDefault();
     if (evt.target !== shop) {
@@ -24,8 +24,8 @@
     }
   };
 
-  inventory.addEventListener('drop', moveItemToInventory);
-  shop.addEventListener('drop', moveItemToShop);
+  inventory.addEventListener('drop', onMoveItemToInventory);
+  shop.addEventListener('drop', onMoveItemToShop);
 
   var createEventListener = function (object, eventName, color) {
     object.addEventListener(eventName, function (evt) {
