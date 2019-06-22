@@ -6,8 +6,8 @@ var WIZARDS_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146,
 var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 var NUMBER_OF_WIZARDS = 4;
-var ESC_KEYCODE = 27;
-var ENTER_KEYCODE = 13;
+// var ESC_KEYCODE = 27;
+// var ENTER_KEYCODE = 13;
 
 // Генерируем случайно число
 var generateRandomNumber = function (max) {
@@ -67,70 +67,18 @@ var showSetupSimilar = function () {
 };
 showSetupSimilar();
 
-// Нажатие на элемент .setup-open удаляет класс hidden
-// у блока setup. Нажатие на элемент .setup-close, расположенный
-// внутри блока setup возвращает ему класс hidden.
-var setup = document.querySelector('.setup');
-var setupOpen = document.querySelector('.setup-open');
-var setupClose = setup.querySelector('.setup-close');
-var userNameInput = setup.querySelector('.setup-user-name');
-
-var isEscKey = function (evt) {
-  return evt.keyCode === ESC_KEYCODE;
-};
-
-var isEnterKey = function (evt) {
-  return evt.keyCode === ENTER_KEYCODE;
-};
-
-var onPopupEscPress = function (evt) {
-  if (isEscKey(evt) && (userNameInput !== document.activeElement)) {
-    closePopup();
-  }
-};
-
-var openPopup = function () {
-  setup.classList.remove('hidden');
-  document.addEventListener('keydown', onPopupEscPress);
-};
-
-var closePopup = function () {
-  setup.classList.add('hidden');
-  document.removeEventListener('keydown', onPopupEscPress);
-};
-
-setupOpen.addEventListener('click', function () {
-  openPopup();
-});
-
-setupOpen.addEventListener('keydown', function (evt) {
-  if (isEnterKey(evt)) {
-    openPopup();
-  }
-});
-
-setupClose.addEventListener('click', function () {
-  closePopup();
-});
-
-setupClose.addEventListener('keydown', function (evt) {
-  if (isEnterKey(evt)) {
-    closePopup();
-  }
-});
-
 // Проверка валидности формы
 // Имя
 
-userNameInput.addEventListener('invalid', function () {
-  if (userNameInput.validity.tooShort) {
-    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-  } else if (userNameInput.validity.tooLong) {
-    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
-  } else if (userNameInput.validity.valueMissing) {
-    userNameInput.setCustomValidity('Обязательное поле');
+window.userNameInput.addEventListener('invalid', function () {
+  if (window.userNameInput.validity.tooShort) {
+    window.userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (window.userNameInput.validity.tooLong) {
+    window.userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+  } else if (window.userNameInput.validity.valueMissing) {
+    window.userNameInput.setCustomValidity('Обязательное поле');
   } else {
-    userNameInput.setCustomValidity('');
+    window.userNameInput.setCustomValidity('');
   }
 });
 
@@ -165,3 +113,4 @@ var onFireballClick = function () {
 coat.addEventListener('click', onCoatClick);
 eyes.addEventListener('click', onEyesClick);
 fireball.addEventListener('click', onFireballClick);
+
