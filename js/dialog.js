@@ -57,10 +57,10 @@
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
-  window.userNameInput = setup.querySelector('.setup-user-name');
+  window.dialog = {userNameInput: setup.querySelector('.setup-user-name')};
 
   var onPopupEscPress = function (evt) {
-    if (window.userNameInput !== document.activeElement) {
+    if (window.dialog.userNameInput !== document.activeElement) {
       window.util.isEscKey(evt, closePopup);
     }
   };
