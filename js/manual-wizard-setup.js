@@ -6,9 +6,9 @@
   var eyes = playerSetup.querySelector('.wizard-eyes');
   var coat = playerSetup.querySelector('.wizard-coat');
   var fireball = playerSetup.querySelector('.setup-fireball-wrap');
-  var coatColorInput = coat.querySelector('input[name="coat-color"]');
-  var eyesColorInput = coat.querySelector('input[name="eyes-color"]');
-  var fireballColorInput = coat.querySelector('input[name="fireball-color"]');
+  var coatColorInput = document.querySelector('input[name="coat-color"]');
+  var eyesColorInput = document.querySelector('input[name="eyes-color"]');
+  var fireballColorInput = document.querySelector('input[name="fireball-color"]');
 
   var onCoatClick = function () {
     var coatColor = window.util.getRandomArrayElement(window.wizardSetup.WIZARDS_COATS_COLORS);
