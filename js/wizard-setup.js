@@ -6,7 +6,7 @@
     WIZARDS_EYES_COLORS: ['black', 'red', 'blue', 'yellow', 'green'],
     FIREBALL_COLORS: ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848']
   };
-  var NUMBER_OF_WIZARDS = 4;
+  var DEFAULT_NUMBER_OF_WIZARDS = 4;
 
   // Находим элемент в который будем вставлять новые элементы
   var similarListElement = document.querySelector('.setup-similar-list');
@@ -28,7 +28,7 @@
   // Заполнили массив данных волшебников Складываем новые элементы в контейцнер
   var addToFragment = function (wizards) {
     var fragment = document.createDocumentFragment();
-    var maxNumberOfWizards = NUMBER_OF_WIZARDS;
+    var maxNumberOfWizards = DEFAULT_NUMBER_OF_WIZARDS;
     //  Если полученныйц массив меньше 4, то показываем количество волшебников, которое было получено.
     if (wizards.length < 4) {
       maxNumberOfWizards = wizards.legth;
