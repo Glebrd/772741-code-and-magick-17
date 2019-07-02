@@ -28,7 +28,12 @@
   // Заполнили массив данных волшебников Складываем новые элементы в контейцнер
   var addToFragment = function (wizards) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < NUMBER_OF_WIZARDS; i++) {
+    var maxNumberOfWizards = NUMBER_OF_WIZARDS;
+    //  Если полученныйц массив меньше 4, то показываем количество волшебников, которое было получено.
+    if (wizards.length < 4) {
+      maxNumberOfWizards = wizards.legth;
+    }
+    for (var i = 0; i < maxNumberOfWizards; i++) {
       fragment.appendChild(renderWizard(window.util.getRandomArrayElement(wizards)));
     }
     return fragment;
@@ -42,19 +47,7 @@
     document.querySelector('.setup-similar').classList.remove('hidden');
   };
 
-  var errorHandler = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
-
-  window.backend.load(successHandler, errorHandler);
+  window.backend.exchange('https://js.dump.academy/code-and-magick/data', 'GET', successHandler, window.error.create);
 
   // Покажем блок .setup-similar, удалив у него CSS-класс hidden.
   var showSetupSimilar = function () {

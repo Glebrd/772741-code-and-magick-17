@@ -95,23 +95,11 @@
 
   // Для загрузки
 
-  var errorHandler = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
-
   var form = setup.querySelector('.setup-wizard-form');
   form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), function () {
+    window.backend.exchange('https://js.dump.academy/code-and-magick', 'POST', function () {
       setup.classList.add('hidden');
-    }, errorHandler);
+    }, window.error.create, new FormData(form));
     evt.preventDefault();
   });
 
