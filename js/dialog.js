@@ -57,10 +57,10 @@
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
-  window.dialog = {userNameInput: setup.querySelector('.setup-user-name')};
+  var userNameInput = setup.querySelector('.setup-user-name');
 
   var onPopupEscPress = function (evt) {
-    if (window.dialog.userNameInput !== document.activeElement) {
+    if (userNameInput !== document.activeElement) {
       window.util.isEscKey(evt, closePopup);
     }
   };
@@ -92,4 +92,15 @@
   setupClose.addEventListener('keydown', function (evt) {
     window.util.isEnterKey(evt, closePopup);
   });
+
+  // Для загрузки
+
+  var form = setup.querySelector('.setup-wizard-form');
+  form.addEventListener('submit', function (evt) {
+    window.backend.exchange('https://js.dump.academy/code-and-magick', 'POST', function () {
+      setup.classList.add('hidden');
+    }, window.error.create, new FormData(form));
+    evt.preventDefault();
+  });
+
 })();
