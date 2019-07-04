@@ -24,6 +24,8 @@
   };
 
 
+  playerWizard.eyesColor = 'black';
+  // console.log(getComputedStyle(eyes));
   var onEyesClick = function () {
     var eyesColor = window.util.getRandomArrayElement(window.wizardSetup.WIZARDS_EYES_COLORS);
     eyes.style.fill = eyesColor;

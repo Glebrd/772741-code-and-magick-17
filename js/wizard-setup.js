@@ -18,7 +18,7 @@
 
   // Клонируем шаблон и заполняем данными волшебника
   var renderWizard = function (wizard) {
-    console.log(wizard.name);
+    // console.log(wizard.name);
     var wizardElement = similarWizardTemplate.cloneNode(true);
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
@@ -55,45 +55,72 @@
 
 
   // Фильтр Проверяем соответствие магу игрока
+  //Получаем ранг
+  var getRank = function (wizard) {
+    var rank = 0;
+    if (wizard.colorCoat === window.manualWizardSetup.playerWizard.coatColor) {
+      // console.log(wizard.colorEyes);
+      rank += 2;
+    }
+    if (wizard.colorEyes === window.manualWizardSetup.playerWizard.eyesColor) {
+      // console.log(window.manualWizardSetup.playerWizard.eyesColor);
+      rank += 1;
+    }
+
+    return rank;
+  };
 
   var updateWizards = function () {
-    // Проверяем, что совпадает плащ и глаза
-    var sameCoatAndEyesWizards = data.filter(function (it) {
-      return it.colorCoat === window.manualWizardSetup.playerWizard.coatColor &&
-        it.colorEyes === window.manualWizardSetup.playerWizard.eyesColor;
-    });
-    // Проверяем, что совпадает плащ
-    var sameCoatWizards = data.filter(function (it) {
-      // console.log(it.colorCoat);
-      // console.log(window.manualWizardSetup.playerWizard.coatColor);
-      // console.log(it.colorCoat === window.manualWizardSetup.playerWizard.coatColor);
-      return it.colorCoat === window.manualWizardSetup.playerWizard.coatColor;
-    });
-    // Проверяем, что совпадают глаза
-    var sameEyesWizards = data.filter(function (it) {
-      return it.colorEyes === window.manualWizardSetup.playerWizard.eyesColor;
-    });
-
-    // var filteredWizards = sameCoatWizards.concat(sameEyesWizards).concat(data);
-    // console.log(filteredWizards);
-    // Объединяем итоговоыйц массив
-    var filteredWizards = sameCoatAndEyesWizards;
-    filteredWizards = filteredWizards.concat(sameCoatWizards);
-    filteredWizards = filteredWizards.concat(sameEyesWizards);
-    filteredWizards = filteredWizards.concat(data);
-
-
-    // Проверяем уникальность волшебника (если волшебник уже был, то не берём)
-    var uniqueWizards =
-    filteredWizards.filter(function (it, i) {
-      // console.log(filteredWizards.indexOf(it));
-      return filteredWizards.indexOf(it) === i;
-    });
-
-console.log(uniqueWizards);
-    // ?передаём дальше?
-    similarListElement.appendChild(addToFragment(uniqueWizards));
+    // similarListElement.appendChild(addToFragment(uniqueWizards));
+    similarListElement.appendChild(addToFragment(data.sort(function (left, right) {
+      // console.log('Левый:' + left.name + 'Правый:' + right.name);
+      // console.log('Левый ранг:' + getRank(left) + 'Правыйц ранг:' + getRank(right));
+      console.log(getRank(right) - getRank(left));
+      return getRank(right) - getRank(left);
+    })));
+    // console.log(data);
   };
+
+//   var updateWizards = function () {
+
+
+//     // Проверяем, что совпадает плащ и глаза
+//     var sameCoatAndEyesWizards = data.filter(function (it) {
+//       return it.colorCoat === window.manualWizardSetup.playerWizard.coatColor &&
+//         it.colorEyes === window.manualWizardSetup.playerWizard.eyesColor;
+//     });
+//     // Проверяем, что совпадает плащ
+//     var sameCoatWizards = data.filter(function (it) {
+//       // console.log(it.colorCoat);
+//       // console.log(window.manualWizardSetup.playerWizard.coatColor);
+//       // console.log(it.colorCoat === window.manualWizardSetup.playerWizard.coatColor);
+//       return it.colorCoat === window.manualWizardSetup.playerWizard.coatColor;
+//     });
+//     // Проверяем, что совпадают глаза
+//     var sameEyesWizards = data.filter(function (it) {
+//       return it.colorEyes === window.manualWizardSetup.playerWizard.eyesColor;
+//     });
+
+//     // var filteredWizards = sameCoatWizards.concat(sameEyesWizards).concat(data);
+//     // console.log(filteredWizards);
+//     // Объединяем итоговоыйц массив
+//     var filteredWizards = sameCoatAndEyesWizards;
+//     filteredWizards = filteredWizards.concat(sameCoatWizards);
+//     filteredWizards = filteredWizards.concat(sameEyesWizards);
+//     filteredWizards = filteredWizards.concat(data);
+
+
+//     // Проверяем уникальность волшебника (если волшебник уже был, то не берём)
+//     var uniqueWizards =
+//     filteredWizards.filter(function (it, i) {
+//       // console.log(filteredWizards.indexOf(it));
+//       return filteredWizards.indexOf(it) === i;
+//     });
+
+// console.log(uniqueWizards);
+//     // ?передаём дальше?
+//     similarListElement.appendChild(addToFragment(uniqueWizards));
+//   };
 
   window.wizardSetup = {
     WIZARDS_COATS_COLORS: WIZARDS_COATS_COLORS,
