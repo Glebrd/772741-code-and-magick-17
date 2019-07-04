@@ -20,7 +20,7 @@
     coatColorInput.value = coatColor;
     // Для фильтра
     playerWizard.coatColor = coatColor;
-    window.wizardSetup.updateWizards();
+    window.debounce(window.wizardSetup.updateWizards);
   };
 
 
@@ -32,10 +32,8 @@
     eyesColorInput.value = eyesColor;
     // Для фильтра
     playerWizard.eyesColor = eyesColor;
-    window.wizardSetup.updateWizards();
+    window.debounce(window.wizardSetup.updateWizards);
   };
-
-
 
   var onFireballClick = function () {
     var fireballColor = window.util.getRandomArrayElement(window.wizardSetup.FIREBALL_COLORS);
