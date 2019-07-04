@@ -70,13 +70,28 @@
     return rank;
   };
 
+  // Чтобы алгоритм был устойчивым, при сортировке нужно указать, как сортировать в случае, когда маги равны. Например, по имени в алфавитном порядке.
+  var namesComparator = function (left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
+    }
+  };
+
   var updateWizards = function () {
     // similarListElement.appendChild(addToFragment(uniqueWizards));
     similarListElement.appendChild(addToFragment(data.sort(function (left, right) {
       // console.log('Левый:' + left.name + 'Правый:' + right.name);
       // console.log('Левый ранг:' + getRank(left) + 'Правыйц ранг:' + getRank(right));
-      console.log(getRank(right) - getRank(left));
-      return getRank(right) - getRank(left);
+      // console.log(getRank(right) - getRank(left));
+      var rankDiff = getRank(right) - getRank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesComparator(left.name, right.name);
+      }
+      return rankDiff;
     })));
     // console.log(data);
   };
