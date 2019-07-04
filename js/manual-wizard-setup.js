@@ -12,7 +12,7 @@
   var fireballColorInput = playerSetup.querySelector('input[name="fireball-color"]');
   var playerWizard = {};
 
-  // Для фильтра
+
   playerWizard.coatColor = coat.style.fill;
   var onCoatClick = function () {
     var coatColor = window.util.getRandomArrayElement(window.wizardSetup.WIZARDS_COATS_COLORS);
@@ -23,14 +23,14 @@
     window.wizardSetup.updateWizards();
   };
 
-  // Для фильтра
-  var currentEyesColor;
+
   var onEyesClick = function () {
     var eyesColor = window.util.getRandomArrayElement(window.wizardSetup.WIZARDS_EYES_COLORS);
     eyes.style.fill = eyesColor;
     eyesColorInput.value = eyesColor;
     // Для фильтра
-    window.manualWizardSetup.currentEyesColor = eyesColor;
+    playerWizard.eyesColor = eyesColor;
+    window.wizardSetup.updateWizards();
   };
 
 

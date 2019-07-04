@@ -30,7 +30,7 @@
   var addToFragment = function (wizards) {
     var fragment = document.createDocumentFragment();
     similarListElement.innerHTML = '';
-    for (var i = 0; i < wizards.length; i++) {
+    for (var i = 0; i < 4; i++) {
       fragment.appendChild(renderWizard(wizards[i]));
     }
     return fragment;
@@ -54,7 +54,7 @@
   showSetupSimilar();
 
 
-  // Фильтр
+  // Фильтр Проверяем соответствие магу игрока
 
   var updateWizards = function () {
     var sameCoatWizards = data.filter(function (it) {
@@ -63,7 +63,11 @@
       console.log(it.colorCoat === window.manualWizardSetup.playerWizard.coatColor);
       return it.colorCoat === window.manualWizardSetup.playerWizard.coatColor;
     });
-    similarListElement.appendChild(addToFragment(sameCoatWizards));
+    var sameEyesWizards = data.filter(function (it) {
+      return it.colorEyes === window.manualWizardSetup.playerWizard.eyesColor;
+    });
+    // ?передаём дальше?
+    similarListElement.appendChild(addToFragment(sameCoatWizards.concat(sameEyesWizards).concat(data)));
   };
 
   window.wizardSetup = {
